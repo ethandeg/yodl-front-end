@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import UserBasic from "./UserBasic"
-const Admin = () => {
-    let [users, setUsers] = useState([])
-    useEffect(() => {
-        async function getUsers() {
-            const res = await axios.get(`http://localhost:3000/users`)
-            setUsers(res.data)
-        }
-        getUsers()
-    }, [])
+const Admin = ({getUsers, users}) => {
+    useEffect(() => getUsers())
     return (
         <>
             {users.length

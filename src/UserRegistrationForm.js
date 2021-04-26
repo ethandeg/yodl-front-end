@@ -1,5 +1,8 @@
 import { useState } from "react"
-const UserRegistrationForm = () => {
+import {useHistory} from "react-router-dom"
+import axios from "axios"
+const UserRegistrationForm = ({addUser}) => {
+    const history = useHistory()
     const INITIAL_STATE = { email: '', firstName: "", lastName: "", password: "" }
     const [formData, setFormData] = useState(INITIAL_STATE)
     const handleChange = e => {
@@ -9,10 +12,11 @@ const UserRegistrationForm = () => {
             [name]: value
         }))
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData)
+        addUser(formData)
         setFormData(INITIAL_STATE)
+        history.push('/admin')
     }
     return (
         <form className="box" onSubmit={handleSubmit}>
